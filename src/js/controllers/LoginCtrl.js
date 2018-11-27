@@ -40,10 +40,13 @@
       }, err => {
         Loading.hide()
         console.error(err)
-        if (err.error === 'Wrong username/password.') {
+
+        if (err.error === 'login-approval') {
+          c.error = 'It looks like Facebook have temporarily disabled your account. Please login to <a href="https://facebook.com" target="_blank">Facebook</a>.'
+        } else if (err.error === 'Wrong username/password.') {
           c.error = err.error
         } else {
-          c.error = 'Could\'nt login. Please make sure 2 Factor Authenication is not enabled, it\'s not supported.'
+          c.error = 'Couldn\'t login. Please make sure 2 Factor Authentication is not enabled, it\'s not supported.'
         }
       })
     }
