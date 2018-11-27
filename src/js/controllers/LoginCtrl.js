@@ -34,6 +34,11 @@
           email: c.email
         }, 'credentials')
         c.password = null
+
+        Storage.set({
+          confirmed: true
+        }, 'confirmed_beta')
+
         Loading.hide()
         $rootScope.loggedIn = true
         $rootScope.$emit('loggedIn')
@@ -60,15 +65,22 @@
         }
       })
 
-    $mdDialog.show(
-      $mdDialog.alert()
-        .clickOutsideToClose(true)
-        .title('Faceply is in Beta!')
-        .textContent(`Some bugs and errors are probable.
-        We will fix many issues in the following updates.
-        We appreciate your patience :)`)
-        .ok('Got it!')
-    )
+    Storage.get('confirmed_beta')
+      .then(response => {
+        if (response && response.confirmed) {
+          return
+        }
+
+        $mdDialog.show(
+          $mdDialog.alert()
+            .clickOutsideToClose(true)
+            .title('Faceply is in Beta!')
+            .textContent(`Some bugs and errors are probable.
+              We will fix many issues in the following updates.
+              We appreciate your patience :)`)
+            .ok('Got it!')
+        )
+      })
   }
 
   window.angular.module('Faceply')
