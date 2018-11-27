@@ -1,5 +1,5 @@
 {
-  "name": "Faceply.io",
+  "name": "faceply-io",
   "version": "0.1.0",
   "description": "A Facebook Messenger AutoReplier App built with Electron",
   "main": "main.js",
@@ -32,7 +32,10 @@
       }
     ]
   },
-  "author": "Roman Kisil",
+  "authors": [
+    "Roman Kisil",
+    "Alex Blackham / https://github.com/b3none"
+  ],
   "devDependencies": {
     "angular": "^1.6.5",
     "angular-animate": "^1.6.5",

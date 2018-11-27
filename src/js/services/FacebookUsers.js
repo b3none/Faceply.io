@@ -2,11 +2,10 @@
   const FacebookUsers = (
     Facebook,
     $q,
-    Logger
   ) => {
     const FacebookUsers = {}
 
-    FacebookUsers.getInfo = (ids) => {
+    FacebookUsers.getInfo = ids => {
       return Facebook.api('getUserInfo', [ids])
         .then(infos => {
           console.log(infos)

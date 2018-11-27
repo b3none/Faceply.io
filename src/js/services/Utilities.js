@@ -18,7 +18,6 @@
   }
   window.angular.module('Faceply')
     .service('Utilities', [
-
       Utilities
     ])
 })()

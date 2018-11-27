@@ -77,7 +77,7 @@
       return q.promise
     }
 
-    FacebookMockAPI.getUserInfo = (ids) => {
+    FacebookMockAPI.getUserInfo = ids => {
       const result = {}
       if (Array.isArray(ids)) {
         ids.forEach(id => {
@@ -90,7 +90,7 @@
       return $q.resolve(result)
     }
 
-    FacebookMockAPI.listen = (cb) => {
+    FacebookMockAPI.listen = cb => {
       $interval(() => {
         const thread = threads[Math.floor(Math.random() * threads.length)]
         cb(null, {
@@ -102,7 +102,7 @@
 
     FacebookMockAPI.sendMessage = (message, threadID) => $q.resolve()
 
-    FacebookMockAPI.markAsRead = (threadID) => $q.resolve()
+    FacebookMockAPI.markAsRead = threadID => $q.resolve()
 
     return FacebookMockAPI
   }

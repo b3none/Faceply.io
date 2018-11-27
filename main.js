@@ -1,6 +1,8 @@
 const electron = require('electron')
+
 // Module to control application life.
 const app = electron.app
+
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 
@@ -81,7 +83,7 @@ function createWindow () {
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
 
-  mainWindow.on('close', (e) => {
+  mainWindow.on('close', e => {
     if (process.platform === 'darwin' && !forceQuit) {
       mainWindow.hide()
       e.preventDefault()
@@ -152,7 +154,7 @@ app.on('before-quit', () => {
 // })
 // autoUpdater.on('download-progress', (progressObj) => {
 // })
-autoUpdater.on('update-downloaded', (info) => {
+autoUpdater.on('update-downloaded', info => {
   // Wait 5 seconds, then quit and install
   // In your application, you don't need to wait 5 seconds.
   // You could call autoUpdater.quitAndInstall(); immediately

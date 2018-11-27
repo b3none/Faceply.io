@@ -25,12 +25,12 @@
               threadCache[thread.threadID] = thread
               if (thread.isCanonical) {
                 return FacebookUsers.getInfo(thread.threadID)
-                .then(userInfo => {
-                  threadCache[thread.threadID] = Object.assign(threadCache[thread.threadID], userInfo)
-                  threadsComplete++
-                  q.notify(threadsComplete * 100 / threads.length)
-                  return $q.when()
-                }, $q.when)
+                  .then(userInfo => {
+                    threadCache[thread.threadID] = Object.assign(threadCache[thread.threadID], userInfo)
+                    threadsComplete++
+                    q.notify(threadsComplete * 100 / threads.length)
+                    return $q.when()
+                  }, $q.when)
               }
               return $q.when()
             })

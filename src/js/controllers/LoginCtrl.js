@@ -59,12 +59,12 @@
 
     $mdDialog.show(
       $mdDialog.alert()
-      .clickOutsideToClose(true)
-      .title('Faceply is in Beta!')
-      .textContent(`Some bugs and errors are probable.
+        .clickOutsideToClose(true)
+        .title('Faceply is in Beta!')
+        .textContent(`Some bugs and errors are probable.
         We will fix many issues in the following updates.
         We appreciate your patience :)`)
-      .ok('Got it!')
+        .ok('Got it!')
     )
   }
 

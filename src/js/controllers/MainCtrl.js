@@ -49,7 +49,7 @@
       }
     })
 
-    const handleError = (err) => {
+    const handleError = err => {
       console.error(err)
       Logger.userError(err)
     }
@@ -73,7 +73,7 @@
         })
     }
 
-    const getUserGroups = (isFirstLogin) => {
+    const getUserGroups = isFirstLogin => {
       console.log(isFirstLogin)
       return (() => isFirstLogin ? Groups.createInitialGroups() : User.getGroups())()
         .then(groups => {
@@ -85,7 +85,7 @@
     }
 
     const startListening = () => {
-      Facebook.startReceivingMessages((message) => {
+      Facebook.startReceivingMessages(message => {
         const threadID = message.threadID
         const group = mc.groups.find(group => (group.enabled && group.threads.includes(threadID)))
         if (group) {
@@ -111,9 +111,9 @@
           if (chatName) {
             $mdToast.show(
               $mdToast.simple()
-              .textContent(`Replied to: ${chatName}`)
-              .position('bottom left')
-              .hideDelay(2000)
+                .textContent(`Replied to: ${chatName}`)
+                .position('bottom left')
+                .hideDelay(2000)
             )
           }
         }
@@ -137,7 +137,7 @@
       return User.saveGroups(mc.groups)
     }
 
-    mc.selectGroup = (group) => {
+    mc.selectGroup = group => {
       mc.groups.forEach(group => {
         group.selected = false
       })
@@ -148,12 +148,12 @@
     mc.addGroup = () => {
       $mdDialog.show(
         $mdDialog.prompt()
-        .title('New Group')
-        .textContent('Enter new Group name:')
-        .placeholder('Group Name')
-        .initialValue('New Group')
-        .ok('Add')
-        .cancel('Cancel')
+          .title('New Group')
+          .textContent('Enter new Group name:')
+          .placeholder('Group Name')
+          .initialValue('New Group')
+          .ok('Add')
+          .cancel('Cancel')
       ).then(name => {
         if (name) {
           const newGroup = Groups.new()
@@ -167,12 +167,12 @@
     mc.editSelectedGroupName = () => {
       $mdDialog.show(
         $mdDialog.prompt()
-        .title('Edit Group')
-        .textContent('Enter Groups new name:')
-        .placeholder('Group Name')
-        .initialValue(mc.selectedGroup.name)
-        .ok('Save')
-        .cancel('Cancel')
+          .title('Edit Group')
+          .textContent('Enter Groups new name:')
+          .placeholder('Group Name')
+          .initialValue(mc.selectedGroup.name)
+          .ok('Save')
+          .cancel('Cancel')
       ).then(name => {
         if (name) {
           mc.selectedGroup.name = name
@@ -184,10 +184,10 @@
     mc.deleteSelectedGroup = () => {
       $mdDialog.show(
         $mdDialog.confirm()
-        .title('Delete Group')
-        .textContent(`Are you sure you want to delete ${mc.selectedGroup.name}?`)
-        .ok('Yes')
-        .cancel('Cancel')
+          .title('Delete Group')
+          .textContent(`Are you sure you want to delete ${mc.selectedGroup.name}?`)
+          .ok('Yes')
+          .cancel('Cancel')
       ).then(() => {
         mc.groups.forEach((group, i) => {
           if (group.id === mc.selectedGroup.id) {
@@ -207,7 +207,7 @@
       })
     }
 
-    mc.otherGroupIncludesThread = (thread) => {
+    mc.otherGroupIncludesThread = thread => {
       for (let i = 0; i < mc.groups.length; i++) {
         if (mc.groups[i].id === mc.selectedGroup.id) continue
         if (mc.groups[i].threads.includes(thread.threadID)) return true
@@ -215,7 +215,7 @@
       return false
     }
 
-    mc.addThreadToSelectedGroup = (thread) => {
+    mc.addThreadToSelectedGroup = thread => {
       const indexOfThread = mc.selectedGroup.threads.indexOf(thread.threadID)
       if (indexOfThread > -1) {
         mc.selectedGroup.threads.splice(indexOfThread, 1)
@@ -223,10 +223,10 @@
       } else if (mc.otherGroupIncludesThread(thread)) {
         $mdDialog.show(
           $mdDialog.confirm()
-          .title('This Chat is added to another Group')
-          .textContent(`Do you want to move this chat to this Group?`)
-          .ok('Yes, Move')
-          .cancel('Cancel')
+            .title('This Chat is added to another Group')
+            .textContent(`Do you want to move this chat to this Group?`)
+            .ok('Yes, Move')
+            .cancel('Cancel')
         ).then(() => {
           const housingGroup = mc.groups.find(group => group.threads.includes(thread.threadID))
           if (housingGroup) {
@@ -242,19 +242,19 @@
       }
     }
 
-    mc.getThreadImage = (thread) => {
+    mc.getThreadImage = thread => {
       return thread.imgSrc || thread.thumbSrc
     }
 
-    mc.getUserImageById = (userID) => {
+    mc.getUserImageById = userID => {
       return mc.users[userID].thumbSrc || 'img/fb_avatar.jpg'
     }
 
-    mc.getThreadParticipantIDs = (thread) => {
+    mc.getThreadParticipantIDs = thread => {
       return thread.participantIDs.filter(id => id !== mc.currentUserID)
     }
 
-    mc.getThreadName = (thread) => {
+    mc.getThreadName = thread => {
       if (thread.isCanonical) return thread.name
 
       let name = ''

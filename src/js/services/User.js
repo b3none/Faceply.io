@@ -11,20 +11,20 @@
 
     User.getID = () => {
       return Storage.get('user')
-      .then(user => {
-        if (!user.hasOwnProperty('ID')) {
-          user.ID = Utilities.UUID()
-          Storage.set(user, 'user')
-        }
+        .then(user => {
+          if (!user.hasOwnProperty('ID')) {
+            user.ID = Utilities.UUID()
+            Storage.set(user, 'user')
+          }
 
-        return $q.resolve(user.ID)
-      })
+          return $q.resolve(user.ID)
+        })
     }
 
     User.isFirstFacebookLogin = () => {
       const ID = `${User.getFacebookID()}`
 
-      const handle = (exists) => {
+      const handle = exists => {
         if (exists === true) {
           return $q.resolve(false)
         } else {
@@ -36,14 +36,14 @@
       }
 
       return Storage.has(ID)
-      .then(handle, handle)
+        .then(handle, handle)
     }
 
     User.getGroups = () => {
       return Storage.get(`${User.getFacebookID()}-groups`)
     }
 
-    User.saveGroups = (groups) => {
+    User.saveGroups = groups => {
       if (!Array.isArray(groups)) return $q.reject('Could not set groups, entity must be an array')
       return Storage.set(groups, `${User.getFacebookID()}-groups`)
     }
@@ -52,11 +52,11 @@
   }
 
   window.angular.module('Faceply')
-  .service('User', [
-    'Facebook',
-    'Storage',
-    '$q',
-    'Utilities',
-    User
-  ])
+    .service('User', [
+      'Facebook',
+      'Storage',
+      '$q',
+      'Utilities',
+      User
+    ])
 })()

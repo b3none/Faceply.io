@@ -47,7 +47,7 @@
       return q.promise
     }
 
-    Facebook.startReceivingMessages = (cb) => {
+    Facebook.startReceivingMessages = cb => {
       api.listen((err, message) => {
         $timeout(() => {
           if (err) return Logger.error(err)
@@ -75,7 +75,9 @@
         })
 
         const result = api[functionName].apply(null, args)
-        if (result) return result
+        if (result) {
+          return result
+        }
       } else {
         q.reject('Logged out')
       }

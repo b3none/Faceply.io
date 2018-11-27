@@ -10,7 +10,7 @@ import Analytics from 'electron-google-analytics'
     const analytics = new Analytics(Constants.ANALYTICS_ID)
     const domain = 'faceply://app'
 
-    AnalyticsService.pageView = (page) => {
+    AnalyticsService.pageView = page => {
       return User.getID()
         .then(userID => {
           analytics.pageview(domain, page, page, userID)

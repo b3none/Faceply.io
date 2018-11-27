@@ -7,7 +7,7 @@
 
     let loadingScope = null
 
-    Loading.show = (prompt) => {
+    Loading.show = prompt => {
       $mdDialog.show({
         template: `
         <div layout="column" layout-align="center center" layout-padding>
@@ -19,10 +19,10 @@
       })
     }
 
-    Loading.showProgress = (prompt) => {
+    Loading.showProgress = prompt => {
       $rootScope.loadingProgressValue = 1
       $mdDialog.show({
-        controller: ($scope) => {
+        controller: $scope => {
           $scope.loadingProgressValue = 1
           loadingScope = $scope
         },
@@ -36,7 +36,7 @@
       })
     }
 
-    Loading.setProgress = (proc) => {
+    Loading.setProgress = proc => {
       if (loadingScope) loadingScope.loadingProgressValue = proc
     }
 

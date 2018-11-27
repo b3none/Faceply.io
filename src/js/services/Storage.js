@@ -6,7 +6,7 @@
   ) => {
     const Storage = {}
 
-    Storage.get = (key) => {
+    Storage.get = key => {
       const q = $q.defer()
       electronStorage.get(key, (err, data) => {
         if (err) return q.reject(err)
@@ -15,7 +15,7 @@
       return q.promise
     }
 
-    Storage.getMany = (keys) => {
+    Storage.getMany = keys => {
       const q = $q.defer()
       electronStorage.getMany(keys, (err, data) => {
         if (err) return q.reject(err)
@@ -35,14 +35,14 @@
 
     Storage.set = (json, key) => {
       const q = $q.defer()
-      electronStorage.set(key, json, (err) => {
+      electronStorage.set(key, json, err => {
         if (err) return q.reject(err)
         q.resolve(null)
       })
       return q.promise
     }
 
-    Storage.has = (key) => {
+    Storage.has = key => {
       const q = $q.defer()
       electronStorage.has(key, (err, has) => {
         if (err) return q.reject(err)
@@ -62,7 +62,7 @@
 
     Storage.remove = (key) => {
       const q = $q.defer()
-      electronStorage.remove(key, (err) => {
+      electronStorage.remove(key, err => {
         if (err) return q.reject(err)
         q.resolve(null)
       })
@@ -71,7 +71,7 @@
 
     Storage.clear = () => {
       const q = $q.defer()
-      electronStorage.clear((err) => {
+      electronStorage.clear(err => {
         if (err) return q.reject(err)
         q.resolve(null)
       })
